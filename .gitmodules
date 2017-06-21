@@ -1,3 +1,4 @@
 [submodule "curl-sys/curl"]
 	path = curl-sys/curl
-	url = https://github.com/curl/curl
+	url = https://gitlab.redox-os.org/redox-os/curl.git
+	branch = redox

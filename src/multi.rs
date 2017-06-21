@@ -9,7 +9,7 @@ use curl_sys;
 
 #[cfg(windows)]
 use winapi::winsock2::fd_set;
-#[cfg(unix)]
+#[cfg(any(unix, target_os = "redox"))]
 use libc::{fd_set, pollfd, POLLIN, POLLPRI, POLLOUT};
 
 use {MultiError, Error};
@@ -1035,7 +1035,7 @@ impl WaitFd {
     }
 }
 
-#[cfg(unix)]
+#[cfg(any(unix, target_os = "redox"))]
 impl From<pollfd> for WaitFd {
     fn from(pfd: pollfd) -> WaitFd {
         let mut events = 0;

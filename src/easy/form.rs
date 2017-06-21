@@ -290,7 +290,7 @@ impl<'form, 'data> Part<'form, 'data> {
         }
     }
 
-    #[cfg(unix)]
+    #[cfg(any(unix, target_os = "redox"))]
     fn path2cstr(&mut self, p: &Path) -> Option<CString> {
         use std::os::unix::prelude::*;
         self.bytes2cstr(p.as_os_str().as_bytes())

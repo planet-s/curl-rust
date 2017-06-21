@@ -3,7 +3,7 @@
 
 extern crate libc;
 extern crate libz_sys;
-#[cfg(all(unix, not(target_os = "macos"), feature = "ssl"))]
+#[cfg(all(any(unix, target_os = "redox"), not(target_os = "macos"), feature = "ssl"))]
 extern crate openssl_sys;
 #[cfg(windows)]
 extern crate winapi;
@@ -13,7 +13,7 @@ extern crate libnghttp2_sys;
 use libc::{c_int, c_char, c_uint, c_short, c_long, c_double, c_void, size_t, time_t};
 use libc::c_ulong;
 
-#[cfg(unix)]
+#[cfg(any(unix, target_os = "redox"))]
 pub use libc::fd_set;
 #[cfg(windows)]
 pub use winapi::um::winsock2::fd_set;
@@ -35,9 +35,9 @@ pub type curl_off_t = i64;
 
 pub enum CURL {}
 
-#[cfg(unix)]
+#[cfg(any(unix, target_os = "redox"))]
 pub type curl_socket_t = libc::c_int;
-#[cfg(unix)]
+#[cfg(any(unix, target_os = "redox"))]
 pub const CURL_SOCKET_BAD: curl_socket_t = -1;
 #[cfg(all(windows, target_pointer_width = "32"))]
 pub type curl_socket_t = libc::c_uint;
@@ -938,6 +938,7 @@ pub const CURLPIPE_MULTIPLEX: c_long = 2;
 
 pub const CURL_ERROR_SIZE: usize = 256;
 
+/*
 pub type curl_opensocket_callback = extern fn(*mut c_void,
                                               curlsocktype,
                                               *mut curl_sockaddr) -> curl_socket_t;
@@ -957,6 +958,7 @@ pub struct curl_sockaddr {
     #[cfg(windows)]
     pub addr: SOCKADDR,
 }
+*/
 
 extern {
     pub fn curl_formadd(httppost: *mut *mut curl_httppost,

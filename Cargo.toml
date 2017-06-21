@@ -20,7 +20,7 @@ curl-sys = { path = "curl-sys", version = "0.4.15", default-features = false }
 socket2 = "0.3.7"
 
 # Unix platforms use OpenSSL for now to provide SSL functionality
-[target.'cfg(all(unix, not(target_os = "macos")))'.dependencies]
+[target."cfg(all(any(unix, target_os=\"redox\"), not(target_os = \"macos\")))".dependencies]
 openssl-sys = { version = "0.9.33", optional = true }
 openssl-probe = { version = "0.1.2", optional = true }
 
