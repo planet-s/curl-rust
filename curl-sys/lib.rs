@@ -938,7 +938,6 @@ pub const CURLPIPE_MULTIPLEX: c_long = 2;
 
 pub const CURL_ERROR_SIZE: usize = 256;
 
-/*
 pub type curl_opensocket_callback = extern fn(*mut c_void,
                                               curlsocktype,
                                               *mut curl_sockaddr) -> curl_socket_t;
@@ -958,7 +957,6 @@ pub struct curl_sockaddr {
     #[cfg(windows)]
     pub addr: SOCKADDR,
 }
-*/
 
 extern {
     pub fn curl_formadd(httppost: *mut *mut curl_httppost,

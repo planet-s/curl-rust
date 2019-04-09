@@ -52,6 +52,7 @@
 
 extern crate curl_sys;
 extern crate libc;
+extern crate socket2;
 
 #[cfg(all(any(unix, target_os = "redox"), not(target_os = "macos"), feature = "ssl"))]
 extern crate openssl_sys;
